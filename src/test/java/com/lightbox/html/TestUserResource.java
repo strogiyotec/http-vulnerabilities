@@ -49,14 +49,12 @@ public final class TestUserResource {
     public void testUsersAsJson(TestContext context) {
         final Async async = context.async();
 
-        this.vertx.createHttpClient().getNow(9090, "localhost", "/users", resp -> {
-            resp.handler(body -> {
-                final JsonArray users = new JsonObject(body.toString()).getJsonArray("users");
-                context.assertTrue(users.size() == 1);
-                context.assertEquals(users.getJsonObject(0), new JsonObject().put("name", "Almas").put("age", 22));
+        this.vertx.createHttpClient().getNow(9090, "localhost", "/users", resp -> resp.handler(body -> {
+            final JsonArray users = new JsonObject(body.toString()).getJsonArray("users");
+            context.assertTrue(users.size() == 1);
+            context.assertEquals(users.getJsonObject(0), new JsonObject().put("name", "Almas").put("age", 22));
 
-                async.complete();
-            });
-        });
+            async.complete();
+        }));
     }
 }

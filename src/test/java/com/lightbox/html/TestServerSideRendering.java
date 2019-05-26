@@ -48,11 +48,9 @@ public final class TestServerSideRendering {
     public void testSimpleHtmlRender(TestContext context) {
         final Async async = context.async();
 
-        this.vertx.createHttpClient().getNow(8080, "localhost", "/", resp -> {
-            resp.handler(body -> {
-                context.assertTrue(body.toString().contains("Almas"));
-                async.complete();
-            });
-        });
+        this.vertx.createHttpClient().getNow(8080, "localhost", "/", resp -> resp.handler(body -> {
+            context.assertTrue(body.toString().contains("Almas"));
+            async.complete();
+        }));
     }
 }

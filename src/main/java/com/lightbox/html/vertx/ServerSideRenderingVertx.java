@@ -21,7 +21,7 @@ public final class ServerSideRenderingVertx extends AbstractVerticle {
     }
 
     @Override
-    public void start() throws Exception {
+    public void start() {
         final Router router = Router.router(this.vertx);
         router.route(HttpMethod.GET, "/")
                 .handler(event -> {
