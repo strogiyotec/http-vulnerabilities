@@ -7,15 +7,20 @@ import io.vertx.ext.web.templ.ThymeleafTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 /**
- * Render html in server side using {@link io.vertx.ext.web.templ.ThymeleafTemplateEngine}
+ * Render html in server side
+ * using {@link io.vertx.ext.web.templ.ThymeleafTemplateEngine}.
  */
 public final class ServerSideRenderingVertx extends AbstractVerticle {
 
     /**
-     * Engine
+     * Engine.
      */
+    @SuppressWarnings("checkstyle:LineLength")
     private final ThymeleafTemplateEngine engine = ThymeleafTemplateEngine.create();
 
+    /**
+     * Ctor.
+     */
     public ServerSideRenderingVertx() {
         this.initEngine();
     }
@@ -34,7 +39,11 @@ public final class ServerSideRenderingVertx extends AbstractVerticle {
                         }
                     });
                 });
-        this.vertx.createHttpServer().requestHandler(router::accept).listen(8080);
+        this.vertx.createHttpServer().requestHandler(router::accept).listen(8080, event -> {
+            if (event.failed()) {
+                throw new RuntimeException(event.cause());
+            }
+        });
         System.out.println("Server is started at port 8080");
     }
 

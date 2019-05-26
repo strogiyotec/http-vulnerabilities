@@ -4,8 +4,23 @@ import com.lightbox.html.vertx.ServerSideRenderingVertx;
 import com.lightbox.html.vertx.UserResource;
 import io.vertx.core.Vertx;
 
+/**
+ * Entry point.
+ */
 public final class Main {
-    public static void main(String[] args) {
+
+    /**
+     * Ctor.
+     */
+    private Main() {
+    }
+
+    /**
+     * Main.
+     *
+     * @param args Params
+     */
+    public static void main(final String[] args) {
         Vertx.vertx().deployVerticle(new ServerSideRenderingVertx());
         Vertx.vertx().deployVerticle(new UserResource());
     }

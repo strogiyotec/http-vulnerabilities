@@ -28,7 +28,11 @@ public final class UserResource extends AbstractVerticle {
                                     ).toString()
                             );
                 });
-        this.vertx.createHttpServer().requestHandler(router::accept).listen(9090);
+        this.vertx.createHttpServer().requestHandler(router::accept).listen(9090, event -> {
+            if (event.failed()) {
+                throw new RuntimeException(event.cause());
+            }
+        });
         System.out.println("Rest client in port 9090 is started");
     }
 }
