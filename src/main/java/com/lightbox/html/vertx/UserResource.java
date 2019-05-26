@@ -1,5 +1,6 @@
 package com.lightbox.html.vertx;
 
+import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpMethod;
@@ -9,9 +10,14 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 
 /**
- * Rest resource for user
+ * Rest resource for user.
  */
 public final class UserResource extends AbstractVerticle {
+
+    /**
+     * Server port.
+     */
+    private static final int PORT = 9090;
 
     @Override
     public void start() {
@@ -20,7 +26,7 @@ public final class UserResource extends AbstractVerticle {
                 .handler(request -> {
                     final HttpServerResponse response = request.response();
                     response.putHeader(HttpHeaders.CONTENT_TYPE.toString(), "application/json")
-                            .setStatusCode(200)
+                            .setStatusCode(HttpResponseStatus.OK.code())
                             .end(
                                     new JsonObject().put(
                                             "users",
@@ -28,7 +34,7 @@ public final class UserResource extends AbstractVerticle {
                                     ).toString()
                             );
                 });
-        this.vertx.createHttpServer().requestHandler(router::accept).listen(9090, event -> {
+        this.vertx.createHttpServer().requestHandler(router::accept).listen(PORT, event -> {
             if (event.failed()) {
                 throw new RuntimeException(event.cause());
             }

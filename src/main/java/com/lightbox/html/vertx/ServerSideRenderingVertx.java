@@ -13,6 +13,11 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 public final class ServerSideRenderingVertx extends AbstractVerticle {
 
     /**
+     * Server port.
+     */
+    private static final int PORT = 8080;
+
+    /**
      * Engine.
      */
     @SuppressWarnings("checkstyle:LineLength")
@@ -39,7 +44,7 @@ public final class ServerSideRenderingVertx extends AbstractVerticle {
                         }
                     });
                 });
-        this.vertx.createHttpServer().requestHandler(router::accept).listen(8080, event -> {
+        this.vertx.createHttpServer().requestHandler(router::accept).listen(PORT, event -> {
             if (event.failed()) {
                 throw new RuntimeException(event.cause());
             }
@@ -48,7 +53,7 @@ public final class ServerSideRenderingVertx extends AbstractVerticle {
     }
 
     /**
-     * Configure template engine
+     * Configure template engine.
      */
     private void initEngine() {
         final ClassLoaderTemplateResolver classLoaderTemplateResolver = new ClassLoaderTemplateResolver();
