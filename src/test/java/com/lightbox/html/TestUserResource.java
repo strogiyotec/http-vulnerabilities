@@ -41,7 +41,7 @@ public final class TestUserResource {
     }
 
     /**
-     * Test ServerSide html render
+     * Test UsersResource response
      *
      * @param context TestContext
      */
