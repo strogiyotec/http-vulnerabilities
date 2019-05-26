@@ -14,16 +14,17 @@ import org.junit.runner.RunWith;
 
 @RunWith(VertxUnitRunner.class)
 public final class TestUserResource {
+
     /**
-     * Vertx instance
+     * Vertx instance.
      */
     private Vertx vertx;
 
     /**
-     * Init vertx
+     * Init vertx.
      */
     @Before
-    public void init(TestContext context) {
+    public void init(final TestContext context) {
         this.vertx = Vertx.vertx();
 
         this.vertx.deployVerticle(
@@ -36,7 +37,7 @@ public final class TestUserResource {
      * Stop vertx
      */
     @After
-    public void stop(TestContext context) {
+    public void stop(final TestContext context) {
         this.vertx.close(context.asyncAssertSuccess());
     }
 
@@ -46,7 +47,7 @@ public final class TestUserResource {
      * @param context TestContext
      */
     @Test
-    public void testUsersAsJson(TestContext context) {
+    public void testUsersAsJson(final TestContext context) {
         final Async async = context.async();
 
         this.vertx.createHttpClient().getNow(9090, "localhost", "/users", resp -> resp.handler(body -> {
