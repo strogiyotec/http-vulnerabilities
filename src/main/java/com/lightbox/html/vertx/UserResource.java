@@ -74,7 +74,7 @@ public final class UserResource extends AbstractVerticle {
     private void saveUser(final Router router) {
         router.route(HttpMethod.POST, "/users")
                 .handler(request -> {
-                    this.users.add(request.getBodyAsJson());
+                  //  this.users.add(request.getBodyAsJson());
                     final HttpServerResponse response = request.response();
                     response.putHeader(HttpHeaders.CONTENT_TYPE.toString(), "application/json")
                             .setStatusCode(HttpResponseStatus.OK.code())
@@ -96,6 +96,10 @@ public final class UserResource extends AbstractVerticle {
                 .handler(request -> {
                     final HttpServerResponse response = request.response();
                     response.setStatusCode(HttpResponseStatus.OK.code())
+                            .putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN.toString(),request.request().getHeader("Origin"))
+                            .putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS.toString(),"POST")
+                            .putHeader(HttpHeaders.CACHE_CONTROL.toString(),"max-age=3600")
+                            .putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS.toString(),HttpHeaders.CONTENT_TYPE.toString())
                             .end();
                 });
     }
