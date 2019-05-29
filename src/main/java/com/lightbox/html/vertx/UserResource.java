@@ -1,5 +1,6 @@
 package com.lightbox.html.vertx;
 
+import com.lightbox.html.common.DeployVerticle;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpHeaders;
@@ -35,15 +36,7 @@ public final class UserResource extends AbstractVerticle {
         this.corsOptions(router);
         this.saveUser(router);
 
-        this.vertx.createHttpServer()
-                .requestHandler(router::accept)
-                .listen(PORT, event -> {
-                    if (event.failed()) {
-                        throw new RuntimeException(event.cause());
-                    } else {
-                        System.out.println("Rest client in port 9090 is started");
-                    }
-                });
+        DeployVerticle.deploy(this.vertx, router, PORT);
     }
 
     /**

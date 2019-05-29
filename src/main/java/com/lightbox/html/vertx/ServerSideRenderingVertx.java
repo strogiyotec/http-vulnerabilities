@@ -1,5 +1,6 @@
 package com.lightbox.html.vertx;
 
+import com.lightbox.html.common.DeployVerticle;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.Router;
@@ -44,12 +45,16 @@ public final class ServerSideRenderingVertx extends AbstractVerticle {
                         }
                     });
                 });
-        this.vertx.createHttpServer().requestHandler(router::accept).listen(PORT, event -> {
-            if (event.failed()) {
-                throw new RuntimeException(event.cause());
-            }
-        });
-        System.out.println("Server is started at port 8080");
+        router.route(HttpMethod.GET, "/nocors")
+                .handler(
+                        event ->
+                                this.engine.render(
+                                        event,
+                                        "no-cors",
+                                        res -> event.response().end(res.result())
+                                )
+                );
+        DeployVerticle.deploy(this.vertx, router, PORT);
     }
 
     /**
