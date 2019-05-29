@@ -1,6 +1,7 @@
 package com.lightbox.html.vertx;
 
 import com.lightbox.html.common.DeployVerticle;
+import io.netty.handler.codec.http.HttpHeaderValues;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpHeaders;
@@ -46,10 +47,10 @@ public final class UserResource extends AbstractVerticle {
      */
     private void users(final Router router) {
         router.route(HttpMethod.GET, "/users")
-                .handler(request -> {
-                    final HttpServerResponse response = request.response();
-                    response.putHeader(HttpHeaders.CONTENT_TYPE.toString(), "application/json")
-                            .putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN.toString(), request.request().getHeader("Origin"))
+                .handler(event -> {
+                    final HttpServerResponse response = event.response();
+                    response.putHeader(HttpHeaders.CONTENT_TYPE.toString(), HttpHeaderValues.APPLICATION_JSON.toString())
+                            .putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN.toString(), event.request().getHeader("Origin"))
                             .setStatusCode(HttpResponseStatus.OK.code())
                             .end(
                                     new JsonObject()
