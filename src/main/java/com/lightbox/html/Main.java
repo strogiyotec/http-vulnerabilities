@@ -1,6 +1,6 @@
 package com.lightbox.html;
 
-import com.lightbox.html.vertx.ServerSideRenderingVertx;
+import com.lightbox.html.vertx.ServerSideRenderingVerticle;
 import com.lightbox.html.vertx.UserResource;
 import io.vertx.core.Vertx;
 
@@ -21,7 +21,7 @@ public final class Main {
      * @param args Params
      */
     public static void main(final String[] args) {
-        Vertx.vertx().deployVerticle(new ServerSideRenderingVertx());
+        Vertx.vertx().deployVerticle(new ServerSideRenderingVerticle());
         Vertx.vertx().deployVerticle(new UserResource());
     }
 }

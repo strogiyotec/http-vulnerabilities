@@ -11,7 +11,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
  * Render html in server side
  * using {@link io.vertx.ext.web.templ.ThymeleafTemplateEngine}.
  */
-public final class ServerSideRenderingVertx extends AbstractVerticle {
+public final class ServerSideRenderingVerticle extends AbstractVerticle {
 
     /**
      * Server port.
@@ -27,7 +27,7 @@ public final class ServerSideRenderingVertx extends AbstractVerticle {
     /**
      * Ctor.
      */
-    public ServerSideRenderingVertx() {
+    public ServerSideRenderingVerticle() {
         this.initEngine();
     }
 

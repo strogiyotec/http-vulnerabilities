@@ -1,6 +1,6 @@
 package com.lightbox.html;
 
-import com.lightbox.html.vertx.ServerSideRenderingVertx;
+import com.lightbox.html.vertx.ServerSideRenderingVerticle;
 import io.vertx.core.Vertx;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
@@ -26,7 +26,7 @@ public final class TestServerSideRendering {
         this.vertx = Vertx.vertx();
 
         this.vertx.deployVerticle(
-                new ServerSideRenderingVertx(),
+                new ServerSideRenderingVerticle(),
                 context.asyncAssertSuccess()
         );
     }
