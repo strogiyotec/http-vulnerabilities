@@ -7,17 +7,18 @@
     <title>Hello</title>
 </head>
 <body>
-<h1>Allowed origins should be added</h1>
+<h1>This page add cookie sending cors request</h1>
 </body>
 <script type="application/javascript">
     var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
             console.log(xhr.response)
         }
     };
 
-    xhr.open('GET', 'http://localhost:9090/users');
+    xhr.open('GET', 'http://localhost:9090/cred');
     xhr.setRequestHeader("Accept", "application/json");
     xhr.send();
 </script>

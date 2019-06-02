@@ -19,40 +19,19 @@
 <body>
 <h1 th:text="${name}"></h1>
 </body>
-<!--<script type="application/javascript">
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 300) {
-            console.log('success!', xhr);
-        } else {
-            console.log('The request failed!');
-        }
-        console.log('This always runs...');
-    };
-
-    xhr.open('GET', 'http://localhost:9090/users');
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.send();
-</script>-->
-
 <script type="application/javascript">
     var xhr = new XMLHttpRequest();
 
     xhr.onload = function () {
 
         if (xhr.status >= 200 && xhr.status < 300) {
-            console.log('success!', xhr);
-        } else {
-            console.log('The request failed!');
+            console.log(xhr.response)
         }
-        console.log('This always runs...');
     };
 
     xhr.open('POST', 'http://localhost:9090/users');
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
     var body = JSON.stringify({"name": "Vlad", "age": 22});
-    console.log(body)
     xhr.send(body);
 </script>
 

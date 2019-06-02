@@ -2,6 +2,7 @@ package com.lightbox.html;
 
 import com.lightbox.html.vertx.NoCorsRestVerticle;
 import com.lightbox.html.vertx.ServerSideRenderingVerticle;
+import com.lightbox.html.vertx.UserResource;
 import io.vertx.core.Vertx;
 
 /**
@@ -24,5 +25,6 @@ public final class NoCorsMain {
         final Vertx vertx = Vertx.vertx();
         vertx.deployVerticle(new ServerSideRenderingVerticle());
         vertx.deployVerticle(new NoCorsRestVerticle());
+        vertx.deployVerticle(new UserResource());
     }
 }
